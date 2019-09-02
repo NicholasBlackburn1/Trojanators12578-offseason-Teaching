@@ -35,8 +35,8 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
 
     // Sets Sound File path
     private String soundPath = "/FIRST/blocks/sounds";
-    private File screampath   = new File("/sdcard" + soundPath + "/gold.wav");
-    private File silverFile = new File("/sdcard" + soundPath + "/silver.wav");
+    private File screampath   = new File("/sdcard" + soundPath + "/core_death.wav");
+    private File hello = new File("/sdcard" + soundPath + "/hello.wav");
 
     // Runs only on robot start up
     @Override
@@ -69,6 +69,9 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // Calabrates Imu
         ImuInit();
 
+        // When robot inits plays sound turret hello
+        SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, hello);
+
     }
 
     @Override
@@ -80,11 +83,12 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // Calls Function Drive mode
         DriveMode();
 
+        // Calls Function ImuData
         ImuData();
         // Prints Data to the Driver station phone
         telemetry.addData("DriveMode",FrontR.getZeroPowerBehavior());
 
-    }
+    }    // BackR Motor
     // custom function to drive motors
     public void Drive(){
 
@@ -154,7 +158,7 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // updates to screen
         telemetry.update();
         // if robot falls over than plays this file
-        if(angles.secondAngle <=200){
+        if(angles.secondAngle <= -74.625){
             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, screampath);
         }
     }
