@@ -2,10 +2,20 @@ package org.firstinspires.ftc.teamcode;
 
 /*Team 12578 Robot Simple Chassie Drive for Teaching */
 
+import com.qualcomm.ftccommon.SoundPlayer;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
+import java.io.File;
 
 
 /*Sets Operational Mode to Controller opereated */
@@ -17,14 +27,25 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
     private DcMotor BackL;
     private DcMotor FrontR;
     private DcMotor FrontL;
+    private BNO055IMU imu;
 
+    // Created vars for Orientation and Acceleration of imu
+    public  Orientation angles;
+    public Acceleration gravity;
 
-        // Runs only on robot start up
+    // Sets Sound File path
+    private String soundPath = "/FIRST/blocks/sounds";
+    private File screampath   = new File("/sdcard" + soundPath + "/gold.wav");
+    private File silverFile = new File("/sdcard" + soundPath + "/silver.wav");
+
+    // Runs only on robot start up
     @Override
     public void init() {
-
+        // enbles imu to be programend in code
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
 
         // Defines Robot Drive motors in Java
+
         BackL = hardwareMap.dcMotor.get("BackL"); // Back set of wheels
         BackR = hardwareMap.dcMotor.get("BackR");
 
@@ -45,6 +66,9 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         BackR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BackL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        // Calabrates Imu
+        ImuInit();
+
     }
 
     @Override
@@ -56,10 +80,12 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // Calls Function Drive mode
         DriveMode();
 
+        ImuData();
         // Prints Data to the Driver station phone
         telemetry.addData("DriveMode",FrontR.getZeroPowerBehavior());
 
     }
+    // custom function to drive motors
     public void Drive(){
 
         //Takes gampad1 leftstick y axis and right stick x axis to drive robot s
@@ -69,6 +95,12 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
 
         BackL.setPower(gamepad1.left_stick_y - gamepad1.right_stick_x); // Back Set of Wheels s
         BackR.setPower(gamepad1.left_stick_y + gamepad1.right_stick_x);
+
+        FrontR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        BackR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void DriveMode(){
         // Uses Button A on gampad to switch Motor Brake mode to Cost mode
@@ -90,6 +122,40 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
             BackL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
+        }
+    }
+
+    public void ImuInit(){
+
+        // Uses Expansion hub imu to see what axis robot is moving on
+        BNO055IMU.Parameters imuParameters;
+        imuParameters = new BNO055IMU.Parameters();
+        // Use degrees as angle unit.
+        imuParameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        // Express acceleration as m/s^2.
+        imuParameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        // Disable logging.
+        imuParameters.loggingEnabled = false;
+        // Initialize IMU.
+        imu.initialize(imuParameters);
+        // Prompt user to press start buton.
+        telemetry.addData("IMU Callabrated","is Callabrated");
+
+    }
+    public void ImuData(){
+        // Get absolute orientation
+        // Get acceleration due to force of gravity.
+        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        gravity = imu.getGravity();
+        // Display orientation info.
+        telemetry.addData("rot about Z", angles.firstAngle);
+        telemetry.addData("rot about Y", angles.secondAngle);
+        telemetry.addData("rot about X", angles.thirdAngle);
+        // updates to screen
+        telemetry.update();
+        // if robot falls over than plays this file
+        if(angles.secondAngle <=200){
+            SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, screampath);
         }
     }
 
