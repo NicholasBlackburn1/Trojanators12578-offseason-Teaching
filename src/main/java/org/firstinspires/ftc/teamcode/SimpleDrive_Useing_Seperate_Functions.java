@@ -100,11 +100,6 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         BackL.setPower(gamepad1.left_stick_y - gamepad1.right_stick_x); // Back Set of Wheels s
         BackR.setPower(gamepad1.left_stick_y + gamepad1.right_stick_x);
 
-        FrontR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FrontL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        BackR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BackL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void DriveMode(){
         // Uses Button A on gampad to switch Motor Brake mode to Cost mode
@@ -157,9 +152,13 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         telemetry.addData("rot about X", angles.thirdAngle);
         // updates to screen
         telemetry.update();
+
         // if robot falls over than plays this file
-        if(angles.secondAngle <= -74.625){
+        if(angles.secondAngle == -74.625){
             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, screampath);
+        }
+        if(angles.secondAngle != -74.625){
+
         }
     }
 
