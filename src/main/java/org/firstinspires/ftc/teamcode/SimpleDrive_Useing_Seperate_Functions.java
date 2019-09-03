@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -28,6 +29,7 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
     private DcMotor FrontR;
     private DcMotor FrontL;
     private BNO055IMU imu;
+    private DigitalChannel button;
 
     // Created vars for Orientation and Acceleration of imu
     public  Orientation angles;
@@ -36,11 +38,15 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
     // Sets Sound File path
     private String soundPath = "/FIRST/blocks/sounds";
     private File screampath   = new File("/sdcard" + soundPath + "/core_death.wav");
-    private File hello = new File("/sdcard" + soundPath + "/hello.wav");
+    private File hellopath = new File("/sdcard" + soundPath + "/hello.wav");
+    private File turretpath = new File("/sdcard" + soundPath + "/pew.wav");
+
+
 
     // Runs only on robot start up
     @Override
     public void init() {
+
         // enbles imu to be programend in code
         imu = hardwareMap.get(BNO055IMU.class, "imu");
 
@@ -51,6 +57,9 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
 
         FrontL = hardwareMap.dcMotor.get("FrontL"); // Front set of wheels
         FrontR = hardwareMap.dcMotor.get("FrontR");
+
+        //adds digital input on channel 0 for button
+         button = hardwareMap.get(DigitalChannel.class,"button");
 
         //Sets Drive motor Pos
         FrontR.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -69,8 +78,11 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // Calabrates Imu
         ImuInit();
 
+        // sets Digital mode to have an input
+       button.setMode(DigitalChannel.Mode.INPUT);
+
         // When robot inits plays sound turret hello
-        SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, hello);
+        SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, hellopath);
 
     }
 
@@ -85,6 +97,8 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
 
         // Calls Function ImuData
         ImuData();
+
+        turret();
         // Prints Data to the Driver station phone
         telemetry.addData("DriveMode",FrontR.getZeroPowerBehavior());
 
@@ -154,12 +168,21 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         telemetry.update();
 
         // if robot falls over than plays this file
-        if(angles.secondAngle == -74.625){
+        if(angles.secondAngle < -70.625){
             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, screampath);
         }
         if(angles.secondAngle != -74.625){
 
         }
     }
+    public void turret(){
+        if (button.getState() ==true) {
+            //SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, turretpath );
+            telemetry.addData("Button","active");
+            }
 
-}
+         if (button.getState() == false) {
+             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext,turretpath);
+             }
+         }
+    }
