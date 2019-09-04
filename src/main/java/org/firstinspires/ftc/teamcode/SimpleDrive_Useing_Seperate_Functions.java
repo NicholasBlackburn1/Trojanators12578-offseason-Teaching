@@ -40,7 +40,7 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
     private File screampath   = new File("/sdcard" + soundPath + "/core_death.wav");
     private File hellopath = new File("/sdcard" + soundPath + "/hello.wav");
     private File turretpath = new File("/sdcard" + soundPath + "/pew.wav");
-
+    private File disablepath = new File("/sdcard" + soundPath + "/disable.wav");
 
 
     // Runs only on robot start up
@@ -160,10 +160,12 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         // Get acceleration due to force of gravity.
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         gravity = imu.getGravity();
+
         // Display orientation info.
         telemetry.addData("rot about Z", angles.firstAngle);
         telemetry.addData("rot about Y", angles.secondAngle);
         telemetry.addData("rot about X", angles.thirdAngle);
+        telemetry.addData("speed",imu.getAcceleration());
         // updates to screen
         telemetry.update();
 
@@ -185,4 +187,10 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
              SoundPlayer.getInstance().startPlaying(hardwareMap.appContext,turretpath);
              }
          }
+         // runs when robot is disableed
+         @Override
+    public void stop(){
+            telemetry.addData("Robot_Dead","true");
+             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext,disablepath);
+        }
     }
