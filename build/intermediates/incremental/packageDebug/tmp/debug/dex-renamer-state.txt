@@ -1,4 +1,4 @@
-#Wed Sep 04 12:38:27 EDT 2019
+#Sun Sep 08 17:48:36 EDT 2019
 base.0=/home/nickthehacker/SkyStone/TeamCode/build/intermediates/dex/debug/mergeDexDebug/out
-renamed.0=classes.dex
 path.0=classes.dex
+renamed.0=classes.dex

@@ -173,17 +173,17 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 8 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 9 warnings</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-Check performed at Wed Sep 04 12:42:31 EDT 2019      </nav>
+Check performed at Thu Sep 05 12:15:32 EDT 2019      </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Issue Types</span>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#overview"><i class="material-icons">dashboard</i>Overview</a>
-      <a class="mdl-navigation__link" href="#SdCardPath"><i class="material-icons warning-icon">warning</i>Hardcoded reference to <code>/sdcard</code> (4)</a>
+      <a class="mdl-navigation__link" href="#SdCardPath"><i class="material-icons warning-icon">warning</i>Hardcoded reference to <code>/sdcard</code> (5)</a>
       <a class="mdl-navigation__link" href="#AllowBackup"><i class="material-icons warning-icon">warning</i>AllowBackup/FullBackupContent Problems (1)</a>
       <a class="mdl-navigation__link" href="#UnusedResources"><i class="material-icons warning-icon">warning</i>Unused resources (2)</a>
       <a class="mdl-navigation__link" href="#GoogleAppIndexingWarning"><i class="material-icons warning-icon">warning</i>Missing support for Firebase App Indexing (1)</a>
@@ -202,7 +202,7 @@ Check performed at Wed Sep 04 12:42:31 EDT 2019      </nav>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
 <tr>
-<td class="countColumn">4</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">5</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#SdCardPath">SdCardPath</a>: Hardcoded reference to <code>/sdcard</code></td></tr>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Security">Security</a>
 </td></tr>
@@ -237,13 +237,22 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
+<span class="location"><a href="../../src/main/java/org/firstinspires/ftc/teamcode/Gyro_drive.java">../../src/main/java/org/firstinspires/ftc/teamcode/Gyro_drive.java</a>:34</span>: <span class="message">Do not hardcode "/sdcard/"; use <code>Environment.getExternalStorageDirectory().getPath()</code> instead</span><br /><pre class="errorlines">
+<span class="lineno">  31 </span>
+<span class="lineno">  32 </span>    <span class="comment">// Sets Sound File path</span>
+<span class="lineno">  33 </span>    <span class="keyword">private</span> String soundPath = <span class="string">"/FIRST/blocks/sounds"</span>;
+<span class="caretline"><span class="lineno">  34 </span>    <span class="keyword">private</span> File hellopath = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/hello.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    <span class="annotation">@Override</span></pre>
+
 <span class="location"><a href="../../src/main/java/org/firstinspires/ftc/teamcode/SimpleDrive_Useing_Seperate_Functions.java">../../src/main/java/org/firstinspires/ftc/teamcode/SimpleDrive_Useing_Seperate_Functions.java</a>:40</span>: <span class="message">Do not hardcode "/sdcard/"; use <code>Environment.getExternalStorageDirectory().getPath()</code> instead</span><br /><pre class="errorlines">
 <span class="lineno">  37 </span>
 <span class="lineno">  38 </span>    <span class="comment">// Sets Sound File path</span>
 <span class="lineno">  39 </span>    <span class="keyword">private</span> String soundPath = <span class="string">"/FIRST/blocks/sounds"</span>;
 <span class="caretline"><span class="lineno">  40 </span>    <span class="keyword">private</span> File screampath   = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/core_death.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno">  41 </span>    <span class="keyword">private</span> File hellopath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/hello.wav"</span>);
-<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/pew.wav"</span>);
+<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/fizzel.wav"</span>);
 <span class="lineno">  43 </span>    <span class="keyword">private</span> File disablepath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/disable.wav"</span>);
 </pre>
 
@@ -252,7 +261,7 @@ Dismiss</button>            </div>
 <span class="lineno">  39 </span>    <span class="keyword">private</span> String soundPath = <span class="string">"/FIRST/blocks/sounds"</span>;
 <span class="lineno">  40 </span>    <span class="keyword">private</span> File screampath   = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/core_death.wav"</span>);
 <span class="caretline"><span class="lineno">  41 </span>    <span class="keyword">private</span> File hellopath = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/hello.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/pew.wav"</span>);
+<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/fizzel.wav"</span>);
 <span class="lineno">  43 </span>    <span class="keyword">private</span> File disablepath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/disable.wav"</span>);
 </pre>
 
@@ -260,7 +269,7 @@ Dismiss</button>            </div>
 <span class="lineno">  39 </span>    <span class="keyword">private</span> String soundPath = <span class="string">"/FIRST/blocks/sounds"</span>;
 <span class="lineno">  40 </span>    <span class="keyword">private</span> File screampath   = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/core_death.wav"</span>);
 <span class="lineno">  41 </span>    <span class="keyword">private</span> File hellopath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/hello.wav"</span>);
-<span class="caretline"><span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/pew.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="caretline"><span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/fizzel.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno">  43 </span>    <span class="keyword">private</span> File disablepath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/disable.wav"</span>);
 <span class="lineno">  44 </span>
 </pre>
@@ -268,7 +277,7 @@ Dismiss</button>            </div>
 <span class="location"><a href="../../src/main/java/org/firstinspires/ftc/teamcode/SimpleDrive_Useing_Seperate_Functions.java">../../src/main/java/org/firstinspires/ftc/teamcode/SimpleDrive_Useing_Seperate_Functions.java</a>:43</span>: <span class="message">Do not hardcode "/sdcard/"; use <code>Environment.getExternalStorageDirectory().getPath()</code> instead</span><br /><pre class="errorlines">
 <span class="lineno">  40 </span>    <span class="keyword">private</span> File screampath   = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/core_death.wav"</span>);
 <span class="lineno">  41 </span>    <span class="keyword">private</span> File hellopath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/hello.wav"</span>);
-<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/pew.wav"</span>);
+<span class="lineno">  42 </span>    <span class="keyword">private</span> File turretpath = <span class="keyword">new</span> File(<span class="string">"/sdcard"</span> + soundPath + <span class="string">"/fizzel.wav"</span>);
 <span class="caretline"><span class="lineno">  43 </span>    <span class="keyword">private</span> File disablepath = <span class="keyword">new</span> File(<span class="warning"><span class="string">"/sdcard"</span></span> + soundPath + <span class="string">"/disable.wav"</span>);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno">  44 </span>
 <span class="lineno">  45 </span>

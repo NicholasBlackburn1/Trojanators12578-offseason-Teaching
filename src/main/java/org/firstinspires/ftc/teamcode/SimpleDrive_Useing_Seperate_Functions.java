@@ -39,7 +39,7 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
     private String soundPath = "/FIRST/blocks/sounds";
     private File screampath   = new File("/sdcard" + soundPath + "/core_death.wav");
     private File hellopath = new File("/sdcard" + soundPath + "/hello.wav");
-    private File turretpath = new File("/sdcard" + soundPath + "/pew.wav");
+    private File turretpath = new File("/sdcard" + soundPath + "/fizzel.wav");
     private File disablepath = new File("/sdcard" + soundPath + "/disable.wav");
 
 
@@ -178,13 +178,14 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         }
     }
     public void turret(){
-        if (button.getState() ==true) {
-            //SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, turretpath );
+        while(button.getState() ==true) {
+            SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, turretpath );
             telemetry.addData("Button","active");
             }
 
          if (button.getState() == false) {
-             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext,turretpath);
+            telemetry.addData("Button", "false");
+
              }
          }
          // runs when robot is disableed

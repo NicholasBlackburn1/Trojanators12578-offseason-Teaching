@@ -11,6 +11,24 @@
         explanation="Your code should not reference the `/sdcard` path directly; instead use `Environment.getExternalStorageDirectory().getPath()`.&#xA;&#xA;Similarly, do not reference the `/data/data/` path directly; it can vary in multi-user scenarios. Instead, use `Context.getFilesDir().getPath()`."
         url="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
         urls="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        errorLine1="    private File hellopath = new File(&quot;/sdcard&quot; + soundPath + &quot;/hello.wav&quot;);"
+        errorLine2="                                      ~~~~~~~~~">
+        <location
+            file="/home/nickthehacker/SkyStone/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/Gyro_drive.java"
+            line="34"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="SdCardPath"
+        severity="Warning"
+        message="Do not hardcode &quot;/sdcard/&quot;; use `Environment.getExternalStorageDirectory().getPath()` instead"
+        category="Correctness"
+        priority="6"
+        summary="Hardcoded reference to `/sdcard`"
+        explanation="Your code should not reference the `/sdcard` path directly; instead use `Environment.getExternalStorageDirectory().getPath()`.&#xA;&#xA;Similarly, do not reference the `/data/data/` path directly; it can vary in multi-user scenarios. Instead, use `Context.getFilesDir().getPath()`."
+        url="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        urls="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
         errorLine1="    private File screampath   = new File(&quot;/sdcard&quot; + soundPath + &quot;/core_death.wav&quot;);"
         errorLine2="                                         ~~~~~~~~~">
         <location
@@ -47,7 +65,7 @@
         explanation="Your code should not reference the `/sdcard` path directly; instead use `Environment.getExternalStorageDirectory().getPath()`.&#xA;&#xA;Similarly, do not reference the `/data/data/` path directly; it can vary in multi-user scenarios. Instead, use `Context.getFilesDir().getPath()`."
         url="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
         urls="http://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
-        errorLine1="    private File turretpath = new File(&quot;/sdcard&quot; + soundPath + &quot;/pew.wav&quot;);"
+        errorLine1="    private File turretpath = new File(&quot;/sdcard&quot; + soundPath + &quot;/fizzel.wav&quot;);"
         errorLine2="                                       ~~~~~~~~~">
         <location
             file="/home/nickthehacker/SkyStone/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/SimpleDrive_Useing_Seperate_Functions.java"
