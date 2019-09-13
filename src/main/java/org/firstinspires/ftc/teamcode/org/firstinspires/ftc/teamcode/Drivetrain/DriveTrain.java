@@ -102,6 +102,15 @@ public  class DriveTrain extends OpMode{
         RobotMap.BackL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+    public void Strafe_active(){
+
+        if(gamepad1.a == true){
+            Motor_Strafe_Control();
+
+        }
+
+    }
+
     public void init() {
 
     }
