@@ -51,9 +51,10 @@ public class ImuMapper extends OpMode {
 
         // if robot falls over than plays this file
         if (angles.secondAngle < -70.625) {
+            SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, SoundMapper.screampath);
 
             if (angles.secondAngle != -74.625) {
-
+                
             }
         }
 
