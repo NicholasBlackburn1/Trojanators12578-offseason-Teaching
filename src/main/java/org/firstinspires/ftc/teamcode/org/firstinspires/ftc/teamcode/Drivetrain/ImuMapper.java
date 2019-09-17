@@ -54,7 +54,7 @@ public class ImuMapper extends OpMode {
             SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, SoundMapper.screampath);
 
             if (angles.secondAngle != -74.625) {
-                
+
             }
         }
 
