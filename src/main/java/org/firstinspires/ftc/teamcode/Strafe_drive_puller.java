@@ -32,9 +32,6 @@ public class Strafe_drive_puller extends OpMode {
         Drive.Motor_control();
 
         ImuMap.ImuData();
-
-        Drive.Strafe_active();
-
     }
 
 

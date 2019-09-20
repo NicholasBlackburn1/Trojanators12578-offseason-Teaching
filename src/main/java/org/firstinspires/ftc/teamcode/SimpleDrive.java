@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.ImuMapper;
+
 /*Sets Operational Mode to Controller opereated */
 @TeleOp(name = "Simple  Drive ", group = "TeleOp")
 public class SimpleDrive extends OpMode {
@@ -15,11 +18,12 @@ public class SimpleDrive extends OpMode {
     private DcMotor FrontR;
     private DcMotor FrontL;
 
-
+    ImuMapper map = new ImuMapper();
     // Runs only on robot start up
     @Override
     public void init() {
 
+        map.Init();
 
         // Defines Robot Drive motors in Java
         BackL = hardwareMap.dcMotor.get("BackL"); // Back set of wheels
@@ -47,7 +51,7 @@ public class SimpleDrive extends OpMode {
     public void loop() {
 
         {
-
+            map.ImuData();
             //Takes gampad1 leftstick y axis and right stick x axis to drive robot s
 
             FrontL.setPower(gamepad1.left_stick_y - gamepad1.right_stick_x); // Front set of wheels

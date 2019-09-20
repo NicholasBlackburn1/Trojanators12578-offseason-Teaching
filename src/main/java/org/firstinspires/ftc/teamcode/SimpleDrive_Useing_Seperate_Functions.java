@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.DriveTrain;
 import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.ImuMapper;
+import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.OI;
 import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.RobotMap;
 import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.SoundMapper;
 
@@ -17,15 +18,20 @@ import org.firstinspires.ftc.teamcode.org.firstinspires.ftc.teamcode.Drivetrain.
 public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
 
     // inits Drivetrain Functions and Imumapper Functions
-        public DriveTrain Drive = new DriveTrain();
-        public ImuMapper ImuMap = new ImuMapper();
+        private static OI oi = new OI();
+        private static DriveTrain Drive = new DriveTrain();
+        private static ImuMapper ImuMap = new ImuMapper();
 
     // Runs only on robot start up
     @Override
     public void init() {
+
+        oi.init();
+
         Drive.Init();
 
         ImuMap.Init();
+
         // When robot inits plays sound turret hello
         SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, SoundMapper.hellopath);
 
@@ -39,24 +45,8 @@ public class SimpleDrive_Useing_Seperate_Functions extends OpMode {
         ImuMap.ImuData();
 
         // Prints Data to the Driver station phone
-        telemetry.addData("DriveMode",RobotMap.FrontR.getZeroPowerBehavior());
-
+        telemetry.addData("DriveMode", RobotMap.FrontR.getZeroPowerBehavior());
     }
-
-    public void DriveMode(){
-        // Uses Button A on gampad to switch Motor Brake mode to Cost mode
-        if (gamepad1.a == true){
-
-            Drive.Motor_Coast();
-        }
-        // returns the Robot into Drive into Brake Mode
-        if (gamepad1.a == false){
-
-            Drive.Motor_Break();
-
-        }
-    }
-
          @Override
     public void stop(){
             telemetry.addData("Robot_Dead","true");
